@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 페이지</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <link rel="stylesheet" href="MainManagement.css">
+</head>
+<body>
+    <header id="main-header"></header>
+    <hr>
+    <div class="main-container">
+        <div class="menu-section">
+            <h2 class="section-title">관리자 페이지</h2>
+            <div class="menu-item active" data-page="ProductManagement.html">상품 관리</div>
+            <div class="menu-item" data-page="ProductAdd.html">상품 등록</div>
+            <div class="menu-item" data-page="BannerManagement.html">베너 관리</div>
+        </div>
+        <div class="content-section" id="content-section">
+        </div>
+    </div>
+    
+    <footer id="main-footer"></footer>
+    
+    <script>
+        $(document).ready(function () {
+            $("#main-header").load("HeaderManagement.html");
+            $("#main-footer").load("../main/Footer.html");
+            $("#content-section").load("../management/ProductManagement.html");
+
+            $(".menu-item").click(function() {
+                $(".menu-item").removeClass("active");
+                $(this).addClass("active");
+
+                var page = $(this).data("page");
+                $("#content-section").load("../management/" + page);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>팀로고</title>
+<link rel="stylesheet" href="TeamLogoCategory.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+	<div class="logo-grid-container">
+        <div class="logo-grid">
+            <div class="logo-item selected" id="all">
+                <img src="../common/image/teamLogo/kboTeamLogo.png" alt="ALL Logo">
+            </div>
+            <div class="logo-item">
+                <img src="../common/image/teamLogo/koreaTeamLogo.png" alt="Korea Team Logo">
+            </div>
+            <div class="logo-item">
+                <img src="../common/image/teamLogo/lgTeamLogo.png" alt="LG Twins Logo">
+            </div>
+            <div class="logo-item">
+                <img src="../common/image/teamLogo/ktTeamLogo.png" alt="KT Wiz Logo">
+            </div>
+            <div class="logo-item">
+                <img src="../common/image/teamLogo/ssgTeamLogo.png" alt="SSG Landers Logo">
+            </div>
+            <div class="logo-item">
+                <img src="../common/image/teamLogo/ncTeamLogo.png" alt="NC Dinos Logo">
+            </div>
+            <div class="logo-item" id="dusan">
+                <img src="../common/image/teamLogo/doosanTeamLogo.png" alt="Doosan Bears Logo">
+            </div>
+            <div class="logo-item">
+                <img src="../common/image/teamLogo/kiaTeamLogo.png" alt="KIA Tigers Logo">
+            </div>
+            <div class="logo-item">
+                <img src="../common/image/teamLogo/lotteTeamLogo.png" alt="Lotte Giants Logo">
+            </div>
+            <div class="logo-item">
+                <img src="../common/image/teamLogo/samsungTeamLogo.png" alt="Samsung Lions Logo">
+            </div>
+            <div class="logo-item">
+                <img src="../common/image/teamLogo/hanhwaTeamLogo.png" alt="Hanwha Eagles Logo">
+            </div>
+            <div class="logo-item">
+                <img src="../common/image/teamLogo/kiwoomTeamLogo.png" alt="Kiwoom Heroes Logo">
+            </div>
+        </div>
+    </div>
+    
+    <script>
+    	document.querySelectorAll('.logo-item').forEach(item => {
+        	item.addEventListener('click', function() {
+        		document.querySelectorAll('.logo-item').forEach(otherItem => {
+                	otherItem.classList.add('dimmed');
+            	});
+
+            	this.classList.remove('dimmed');
+        	});
+    	});
+
+        $(document).ready(function(){
+            $("#all").click(function(){
+                $("article.product").load("Product.html", function() {
+                initializePagination(); 
+            });
+            });
+            $("#dusan").click(function(){
+                $("article.product").load("DusanDetail.html");
+            });
+            function initializePagination() {
+            $('.pagination .page-item').on('click', function() {
+                $('.pagination .page-item').removeClass('active');
+                $(this).addClass('active');
+            });
+        }
+        })
+	</script>
+</body>
+</html>

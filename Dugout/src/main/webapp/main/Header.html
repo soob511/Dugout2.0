@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Header</title>
+<link href="../common/bootstrap/bootstrap.min.css" rel="stylesheet">
+<script src="../common/bootstrap/bootstrap.bundle.min.js"></script>
+<script src="../common/jquery/jquery.min.js"></script>
+<style>
+html{
+    width: 1728px;
+    margin: 0 auto;
+    caret-color: transparent;
+}
+#header-body {
+    text-align: center;
+    min-width: 1280px;
+}
+.members {
+    display: flex;
+    justify-content: flex-end;
+    margin: 24px 0;
+    padding-right: 80px;
+}
+.members a{
+	text-decoration: none;
+	color: #333333;
+}
+.login{
+	margin-right: 16px;
+}
+.logo-icons-section {
+    display: inline-block;
+    width: 100%;
+}
+
+.logo-div, .icons {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.logo-div img {
+    width: 250px; 
+    height: 74px; 
+	margin-left: 240px;
+	margin-bottom: 64px;
+}
+
+.icons {
+    float: right;
+    margin-right: 60px;
+    margin-top: 20px;
+    position: relative;
+}
+
+.icons a {
+    text-decoration: none;
+    color: #333333;
+    font-size: 14px;
+    display: inline-block;
+}
+
+.icons img {
+    width: 34px;
+    height: 30px;
+    margin-right: 16px;
+}
+
+.icons span {
+    font-weight: bold;
+    font-size: 16px;
+    padding-right: 16px;
+}
+
+.cart-badge {
+    position: absolute;
+    right: 20px;
+    top: -8px;
+    background-color: #333333;
+    color: #ffffff;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    line-height: 22px;
+    padding-left: 8px;
+
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+}
+</style>
+</head>
+<body>
+    <div id="header-body">
+        <div class="members">
+            <a href="../login/Login.html" class="login">로그인</a>
+            <a href="../join/JoinForm.html" class="member">회원가입</a>
+        </div>
+        <div class="logo-icons-section">
+            <div class="logo-div">
+                <a href="../main/Main.html"><img class="logo" src="../common/image/logo/logo.png"></a>
+            </div>
+            <div class="icons">
+                <a href="../mypage/MainMyPage.html" class="myPage">
+                    <img src="../common/image/logo/myPage.png" class="myPage-img"><br>
+                    <span>마이페이지</span>
+                </a>
+                <a href="../cart/CartForm.html" class="cart">
+                    <img src="../common/image/logo/cart.png" class="cart-img"><br>
+                    <span>장바구니</span>
+                    <span class="cart-badge">0</span>
+                </a>
+            </div>
+        </div>
+    </div>
+<script>
+$(document).ready(function () {
+    var loginSuccess = localStorage.getItem("login");
+    var userAdmin = localStorage.getItem("userAdmin");
+    if (loginSuccess) {
+        $(".login").text("로그아웃").attr("href", "#").on("click", function () {
+            localStorage.removeItem("login");
+            localStorage.removeItem("userAdmin");
+            location.href = "../main/Main.html"; 
+        });
+        $(".member").css("visibility", "hidden");
+    } else {
+        $(".login").text("로그인");
+    }
+    if (userAdmin === "true") {
+        $("header").load("../management/HeaderManagement.html");
+    }
+});
+</script>
+</body>
+</html>
