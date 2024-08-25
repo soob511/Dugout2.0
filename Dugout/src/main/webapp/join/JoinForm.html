@@ -1,17 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join Form</title>
-    <link href="common/bootstrap/bootstrap.min.css" rel="stylesheet">
-    <script src="common/bootstrap/bootstrap.min.js.map"></script>
-    <script src="common/bootstrap/jquery.min.js.map"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
     <link href="../common/bootstrap/bootstrap.min.css" rel="stylesheet">
-    <script src="../common/bootstrap/bootstrap.bundle.min.js"></script>
     <script src="../common/jquery/jquery.min.js"></script>
+    <script src="../common/bootstrap/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="JoinForm.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 </head>
 <body class="join-body">
     <header id="main-header"></header>
@@ -26,17 +22,14 @@
                     <label for="inputId" class="form-label">아이디</label>
                     <input type="text" class="form-control" id="inputId" placeholder="예) dugout (영문 또는 숫자 4~12자리)">
                     <button type="button" class="id-check">중복확인</button>
-                    <span class="message username-message">이미 존재하는 아이디입니다.</span>
                 </div>
                 <div class="mb-3 form-group">
                     <label for="passwordIn" class="form-label">비밀번호</label>
                     <input type="password" class="form-control" id="input-password" placeholder="영문, 숫자 조합 8 ~ 16자">
-                    <span class="message password-check">비밀번호 형식이 올바르지 않습니다.</span>
                 </div>
                 <div class="mb-3 form-group">
                     <label for="passwordInConfirm" class="form-label">비밀번호 확인</label>
                     <input type="password" class="form-control" id="password-confirm" placeholder="비밀번호 확인">
-                    <span class="message wrong-password">비밀번호가 일치하지 않습니다.</span>
                 </div>
                 <div class="mb-3">
                     <label for="inputName" class="form-label">이름</label>
@@ -47,10 +40,6 @@
                     <input type="text" class="form-control" id="inputPhone">
                 </div>
                 <div class="mb-3">
-                    <label for="inputEmail" class="form-label">이메일</label>
-                    <input type="text" class="form-control" id="inputEmail">
-                </div>
-                <div class="mb-3">
                     <label for="inputAddress" class="form-label">주소</label>
                     <input type="text" class="form-control" id="inputAddress">
                 </div>
@@ -59,204 +48,102 @@
         </form>
     </main>
     <footer></footer>
-<script src="../common/jquery/jquery.min.js"></script>
-<script src="../common/bootstrap/bootstrap.bundle.min.js"></script>
-<script>
-$(document).ready(function () {
-    $("footer").load("../main/Footer.html");
-    $("header").load("../main/Header.html");
-
-    document.querySelector('.btnMember').disabled = true;
-});
-let userId = document.querySelector('#inputId'); 
-let idCheck = document.querySelector('.id-check'); 
-let passwordIn = document.querySelector('#input-password'); 
-let passwordCheckMsg = document.querySelector('.password-check'); 
-let wrongPassword = document.querySelector('.wrong-password');
-let passwordReInput = document.querySelector('#password-confirm');
-let memberButton = document.querySelector('.btnMember');
-
-function idLength(str) {
-    return str.length >= 4 && str.length <= 12;
-}
-function numberAndEng(str) {
-    return /^[A-Za-z\d]{4,12}$/.test(str);
-}
-function strongPassword(str) {
-    return /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$/.test(str);
-}  
-function isMatch(password, passwordRetype) {
-    return password === passwordRetype;
-} 
-function checkId(username) {
-    let users = JSON.parse(localStorage.getItem('users')) || [];
-    return users.some(user => user.id === username);
-}
-function checkForm() {
-    let username = userId.value;
-    let password = passwordIn.value;
-    let confirmPassword = passwordReInput.value;
-    let name = document.querySelector('#inputName').value;
-    let phone = document.querySelector('#inputPhone').value;
-    let address = document.querySelector('#inputAddress').value;
-
-    if (
-        idLength(username) &&
-        numberAndEng(username) &&
-        !checkId(username) &&
-        strongPassword(password) &&
-        isMatch(password, confirmPassword) &&
-        name.trim() !== "" && 
-        phone.trim() !== "" && 
-        address.trim() !== ""
-    ) {
-        memberButton.disabled = false;
-        memberButton.classList.add('active');
-        memberButton.style.backgroundColor = '#333333';
-        memberButton.style.cursor = 'pointer';
-    } else {
-        memberButton.disabled = true;
-        memberButton.classList.remove('active');
-        memberButton.style.backgroundColor = '#ebebeb';
-        memberButton.style.cursor = 'default';
-    }
-}
-
-userId.addEventListener('input', function () {
-    let username = userId.value;
-    if (username.length > 0) {
-        if (idLength(username) && numberAndEng(username)) {
-            idCheck.classList.remove('unavailable', 'available');
-            idCheck.textContent = '중복확인';
-            userId.placeholder = '예) dugout (영문 또는 숫자 4~12자리)'; 
-            document.querySelector('.username-message').style.opacity = 0; 
-        } else {
-            idCheck.classList.remove('available');
-            idCheck.classList.add('unavailable');
-            idCheck.textContent = '사용불가';
-        }
-    } else {
-        idCheck.classList.remove('available', 'unavailable');
-        idCheck.textContent = '중복확인';
-        userId.placeholder = '예) dugout (영문 또는 숫자 4~12자리)'; 
-        userId.classList.remove('error'); 
-        document.querySelector('.form-label').classList.remove('error'); 
-        document.querySelector('.username-message').style.opacity = 0; 
-    }
-    checkForm();
-});      
-
-idCheck.addEventListener('click', function () {
-    let username = userId.value;
-    if (username.length > 0) {
-        if (idCheck.classList.contains('unavailable')) {
-            userId.value = '';
-            userId.classList.remove('error');
-            document.querySelector('.form-label').classList.remove('error');
-            idCheck.classList.remove('unavailable');
-            idCheck.textContent = '중복확인';
-            document.querySelector('.username-message').style.opacity = 0;
-        } else if (checkId(username)) {
-            idCheck.classList.remove('available');
-            idCheck.classList.add('unavailable');
-            idCheck.textContent = '사용불가';
-            userId.classList.add('error');
-            document.querySelector('.form-label').classList.add('error');
-            document.querySelector('.username-message').style.opacity = 1; 
-        } else {
-            idCheck.classList.remove('unavailable');
-            idCheck.classList.add('available');
-            idCheck.textContent = '사용가능';
-            userId.classList.remove('error');
-            document.querySelector('.form-label').classList.remove('error');
-            document.querySelector('.username-message').style.opacity = 0; 
-        }
-    }
-    checkForm();
-});      
-
-passwordIn.addEventListener('keyup', function () {
-    let passwordLabel = document.querySelector('label[for="passwordIn"]');
-    if (passwordIn.value.length !== 0) {
-        if (strongPassword(passwordIn.value)) {
-            passwordCheckMsg.style.opacity = 0;
-            passwordIn.classList.remove('error');
-            passwordLabel.classList.remove('error');
-        } else {
-            passwordCheckMsg.style.opacity = 1;
-            passwordIn.classList.add('error');
-            passwordLabel.classList.add('error');
-        }
-    } else {
-        passwordCheckMsg.style.opacity = 0;
-        passwordIn.classList.remove('error');
-        passwordLabel.classList.remove('error');
-    }
-    checkForm();
-});      
-
-passwordReInput.addEventListener('keyup', function () {
-    let confirmPasswordLabel = document.querySelector('label[for="passwordInConfirm"]');
-    if (passwordReInput.value.length !== 0) {
-        if (isMatch(passwordIn.value, passwordReInput.value)) {
-            wrongPassword.style.opacity = 0;
-            passwordReInput.classList.remove('error');
-            confirmPasswordLabel.classList.remove('error');
-        } else {
-            wrongPassword.style.opacity = 1;
-            passwordReInput.classList.add('error');
-            confirmPasswordLabel.classList.add('error');
-        }
-    } else {
-        wrongPassword.style.opacity = 0;
-        passwordReInput.classList.remove('error');
-        confirmPasswordLabel.classList.remove('error');
-    }
-    checkForm();
-});       
-
-document.querySelector('#inputName').addEventListener('input', function() {
-    checkForm();
-});
-
-document.querySelector('#inputPhone').addEventListener('input', function() {
-    checkForm();
-});
-
-document.querySelector('#inputAddress').addEventListener('input', function() {
-    checkForm();
-});
-
-document.querySelector('.btnMember').addEventListener('click', function(event) {
-    event.preventDefault(); 
-    let joinId = userId.value;
-    let password = passwordIn.value;
-    let name = document.querySelector('#inputName').value;
-    let phone = document.querySelector('#inputPhone').value;
-    let address = document.querySelector('#inputAddress').value;
-
-    if (
-        idLength(joinId) &&
-        numberAndEng(joinId) &&
-        strongPassword(password) &&
-        isMatch(password, passwordReInput.value) &&
-        name.trim() !== "" &&
-        phone.trim() !== "" &&
-        address.trim() !== ""
-    ) {
-        let users = JSON.parse(localStorage.getItem('users')) || [];
-        users.push({
-            id: joinId,
-            password: password,
-            name: name,
-            phone: phone,
-            address: address
+    <script>
+        $(document).ready(function () {
+            // 페이지 로드 시 헤더와 푸터 로드
+            $("footer").load("../main/Footer.html");
+            $("header").load("../main/Header.html");
+        
+            // DOM 요소 참조 및 초기 변수 설정
+            let userId = $('#inputId'); 
+            let idCheck = $('.id-check'); 
+            let passwordIn = $('#input-password'); 
+            let passwordReInput = $('#password-confirm');
+            let memberButton = $('.btnMember');
+            let isIdValid = false;
+        
+            // 유효성 검사 함수
+            function checkForm() {
+                let password = passwordIn.val();
+                let confirmPassword = passwordReInput.val();
+                let name = $('#inputName').val();
+                let phone = $('#inputPhone').val();
+                let address = $('#inputAddress').val();
+        
+                let isValidPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d\W]{8,16}$/.test(password);
+                let isCompleteForm = name.trim() !== "" && phone.trim() !== "" && address.trim() !== "";
+        
+                if (!isValidPassword || !isCompleteForm || !isIdValid) {
+                    return false;
+                }
+                return true;
+            }
+        
+            // 아이디 중복을 체크하는 함수
+            function isDuplicateId(id) {
+                let users = JSON.parse(localStorage.getItem('users')) || [];
+                return users.some(user => user.id === id);
+            }
+        
+            // 아이디 중복 확인 버튼 클릭 처리
+            idCheck.click(function () {
+                let username = userId.val();
+                if (username.length >= 4 && username.length <= 12 && /^[A-Za-z\d]{4,12}$/.test(username)) {
+                    if (isDuplicateId(username)) {
+                        alert('이미 존재하는 아이디입니다.');
+                        isIdValid = false;
+                    } else {
+                        alert('사용 가능한 아이디입니다.');
+                        isIdValid = true;
+                    }
+                } else {
+                    alert('아이디는 영문 또는 숫자 4~12자리로 입력해야 합니다.');
+                    isIdValid = false;
+                }
+                updateButton();
+            });
+        
+            // 버튼 상태를 업데이트하는 함수
+            function updateButton() {
+                if (checkForm()) {
+                    memberButton.prop('disabled', false).addClass('active').css({'background-color': '#333', 'cursor': 'pointer'});
+                } else {
+                    memberButton.prop('disabled', true).removeClass('active').css({'background-color': '#ebebeb', 'cursor': 'default'});
+                }
+            }
+        
+            // 입력 필드 변경 시마다 버튼 상태 업데이트
+            $('#inputId, #input-password, #password-confirm, #inputName, #inputPhone, #inputAddress').on('input', updateButton);
+        
+            // 회원가입 버튼 클릭 처리
+            memberButton.click(function(event) {
+                event.preventDefault();
+                if (checkForm() && passwordIn.val() === passwordReInput.val()) {
+                    let newUser = {
+                        id: userId.val(),
+                        password: passwordIn.val(),
+                        name: $('#inputName').val(),
+                        phone: $('#inputPhone').val(),
+                        address: $('#inputAddress').val()
+                    };
+                    let users = JSON.parse(localStorage.getItem('users')) || [];
+                    users.push(newUser);
+                    localStorage.setItem('users', JSON.stringify(users));
+                    alert("회원가입이 완료되었습니다!");
+                    location.href = '../main/Main.html';
+                } else {
+                    if (!isIdValid) {
+                        alert('아이디 중복 확인을 먼저 해주세요.');
+                    } else if (!(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d\W]{8,16}$/.test(passwordIn.val()))) {
+                        alert('비밀번호는 영문과 숫자를 포함하여 8~16자리로 입력해야 합니다.');
+                    } else if (passwordIn.val() !== passwordReInput.val()) {
+                        alert('비밀번호와 비밀번호 확인이 일치하지 않습니다.');
+                    } else {
+                        alert('모든 필드를 입력해야 합니다.');
+                    }
+                }
+            });
         });
-        localStorage.setItem('users', JSON.stringify(users));
-        alert("회원가입이 완료되었습니다!");
-        location.href = '../main/Main.html';
-    }
-});
-</script>
+    </script>        
 </body>
 </html>
