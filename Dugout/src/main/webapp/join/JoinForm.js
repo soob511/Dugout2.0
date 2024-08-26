@@ -4,6 +4,7 @@ $(document).ready(function () {
 
     var users = JSON.parse(localStorage.getItem("users"));
     let checkKor = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+    let checkPassword =  /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]/;
 
     $(".id-check").click(function(){
         var id = $("#inputId").val().trim();
@@ -24,5 +25,26 @@ $(document).ready(function () {
         }
     })
 
+    $("#inputPassword").on("input",function(){
+        var password = $("#inputPassword").val().trim();
+        if(password.length<8||password.length>16){
+            console.log("비밀번호는 8~16자리 사이입니다.");
+        }else if(!checkPassword.test(password)) {
+            console.log("비밀번호는 영어와 숫자를 포함해야 합니다.");
+        } else {
+            console.log("비밀번호 사용가능");
+        }
+    })
 
+    $("#confirmPassword").on("input",function(){
+        var confirmPassword =  $("#confirmPassword").val().trim();
+        var password = $("#inputPassword").val().trim();
+        if(confirmPassword===password){
+            console.log("비밀번호가 일치합니다.");
+        }else{
+            console.log("비밀번호가 틀렸습니다.");
+        }
+    })
+
+    
 });
