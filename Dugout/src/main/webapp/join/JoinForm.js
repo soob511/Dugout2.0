@@ -46,5 +46,10 @@ $(document).ready(function () {
         }
     })
 
-    
+    $("#inputPhone").on("input",function(){
+        var phone = $("#inputPhone").val().trim();
+        if(!phone.startsWith("010")) {
+            console.log("전화번호는 010으로 시작해야 합니다.");
+        }
+    })
 });
