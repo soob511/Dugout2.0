@@ -1,89 +1,82 @@
-@charset "UTF-8";
-html{
-    width:1728px;
+html {
+  width: 1728px;
+  margin: 0 auto;
+  caret-color: transparent;
 }
 #header-body {
-    width: 100%;
-    padding: 0;
-    box-sizing: border-box;
-    caret-color: transparent;
+  text-align: center;
+  min-width: 1280px;
 }
-.logo-container {
-    clear: both;
-    margin-top: 62px;
-    margin-bottom: 60px;
-    position: relative;
-    text-align: center;
+.members {
+  display: flex;
+  justify-content: flex-end;
+  margin: 24px 0;
+  padding-right: 80px;
 }
-.logo-div {
-    display: inline-block;
-    text-align: center;
+.members a {
+  text-decoration: none;
+  color: #333333;
 }
-.logo {
-    width: 256px; 
-    height: 74px;
-    display: block;
-    margin: 0 auto;
+.login {
+  margin-right: 16px;
 }
-.login{
-	top: -88px;
-	left: 440px;
-	font-size: 14px;
+.logo-icons-section {
+  display: inline-block;
+  width: 100%;
 }
-.member{
-	top: -88px;
-	left: 440px;
-	font-size: 14px;
+
+.logo-div,
+.icons {
+  display: inline-block;
+  vertical-align: middle;
 }
-.myPage{
-	position: absolute;
-    top: -2px;
-    left: 252px;
+
+.logo-div img {
+  width: 250px;
+  height: 74px;
+  margin-left: 240px;
+  margin-bottom: 64px;
 }
-.cart{
-	position: absolute;   
-    top: -2px;
-	left: 252px;
+
+.icons {
+  float: right;
+  margin-right: 60px;
+  margin-top: 20px;
+  position: relative;
 }
-.rights {
-	position: absolute;
-	top: 24px;
-    left: 1020px;
-    width: 20%;
-    text-align: center;
+
+.icons a {
+  text-decoration: none;
+  color: #333333;
+  font-size: 14px;
+  display: inline-block;
 }
-.rights a {
-    display: inline-block;
-    margin-left: 20px;
-    text-decoration: none;
-    color: #333333;
-    text-align: center;
-    position: relative;
+
+.icons img {
+  width: 34px;
+  height: 30px;
+  margin-right: 16px;
 }
-.rights img {
-    width: 34px; 
-    height: 30px;
-    display: block;
-    margin: 0 auto;
+
+.icons span {
+  font-weight: bold;
+  font-size: 16px;
+  padding-right: 16px;
 }
-.rights span{
-	font-weight: bold;
-	font-size: 16px;
-}
-.cart {
-    position: relative;
-}
+
 .cart-badge {
-    position: absolute;
-    top: -10px;
-    right: 6px;
-    background-color: #333333;
-    color: #ffffff;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    line-height: 20px;
-    text-align: center;
-    font-size: 12px;
-    font-weight: bold;
+  position: absolute;
+  right: 20px;
+  top: -8px;
+  background-color: #333333;
+  color: #ffffff;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  line-height: 22px;
+  padding-left: 8px;
+
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
 }

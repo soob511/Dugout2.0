@@ -1,104 +1,29 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-<meta charset="UTF-8">
-<title>관리자헤더</title>
-<link href="../common/bootstrap/bootstrap.min.css" rel="stylesheet">
-<script src="../common/bootstrap/bootstrap.bundle.min.js"></script>
-<script src="../common/jquery/jquery.min.js"></script>
-<!-- <link href="Header.css" rel="stylesheet"> -->
-<style>
-html{
-    width: 1728px;
-    min-width: 1280px;
-    margin: 0 auto;
-    caret-color: transparent;
-}
-#header-body {
-    width: 100%;
-    padding: 0;
-    box-sizing: border-box;
-}
-.logo-container {
-    clear: both;
-    margin-top: 62px;
-    margin-bottom: 60px;
-    position: relative;
-    text-align: center;
-}
-.logo-div {
-    display: inline-block;
-    text-align: center;
-}
-.logo {
-    width: 256px; 
-    height: 74px;
-    display: block;
-    margin: 0 auto;
-}
-.login{
-	top: -88px;
-	left: 440px;
-	font-size: 14px;
-}
-.member{
-	top: -88px;
-	left: 440px;
-	font-size: 14px;
-}
-.myPage{
-	position: absolute;
-    top: -2px;
-    left: 340px;
-}
-.rights {
-	position: absolute;
-	top: 24px;
-    left: 1020px;
-    width: 20%;
-    text-align: center;
-}
-.rights a {
-    display: inline-block;
-    margin-left: 20px;
-    text-decoration: none;
-    color: #333333;
-    text-align: center;
-    position: relative;
-}
-.rights img {
-    width: 34px; 
-    height: 30px;
-    display: block;
-    margin: 0 auto;
-}
-.rights span{
-	font-weight: bold;
-	font-size: 16px;
-}
-</style>
-</head>
-<body id="header-body">
+  <head>
+    <meta charset="UTF-8" />
+    <title>관리자헤더</title>
+    <link href="../common/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <script src="../common/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="../common/jquery/jquery.min.js"></script>
+    <!-- <link href="Header.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="HeaderManagement.css" />
+    <script src="HeaderManagement.js"></script>
+  </head>
+  <body id="header-body">
     <div class="logo-container">
-        <div class="logo-div">
-            <a href="../main/Main.html"><img class="logo" src="../common/image/logo/logo.png"></a>
-        </div>
-        <div class="rights">
-        	<a href="#" class="login">로그아웃</a>
-            <a href="../management/MainManagement.html" class="myPage"><img src="../common/image/logo/myPage.png">
-            	<span>관리자페이지</span>
-            </a>
-        </div>
-    
+      <div class="logo-div">
+        <a href="../main/Main.html"
+          ><img class="logo" src="../common/image/logo/logo.png"
+        /></a>
+      </div>
+      <div class="rights">
+        <a href="#" class="login">로그아웃</a>
+        <a href="../management/MainManagement.html" class="myPage"
+          ><img src="../common/image/logo/myPage.png" />
+          <span>관리자페이지</span>
+        </a>
+      </div>
     </div>
-    <script>
-        $(document).ready(function () {
-            $(".login").on("click", function () {
-                localStorage.removeItem("login");
-                localStorage.removeItem("userAdmin");
-                location.href = "../main/Main.html";
-            });
-        });
-    </script>
-</body>
+  </body>
 </html>
